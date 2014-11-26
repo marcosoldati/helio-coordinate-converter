@@ -2,6 +2,11 @@
 Heliophysics coordinate transformation library
 ==============================================
 
+Changelog
+---------
+26-Nov-2014: Initial check in: HG2HCC and HCC2HG.
+
+
 Overview
 --------
 This Java library supports transformation between various Heliophysics coordinate systems. It builds on a flexible API 
@@ -28,9 +33,9 @@ Supported Conversions
 +===+=======================================================+===+===+===+===+===+===+===+===+===+===+===+===+===+===+===+===+
 |   | Stonyhurst Heliographic Coordinate (HG)               | x | ✓ |   |   |   |   |   |   |   |   |   |   |   |   |   |   |
 +   +-------------------------------------------------------+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+
-|   | Helio Cartesian Coordinate (HCC)                      |   | x |   |   |   |   |   |   |   |   |   |   |   |   |   |   |
+|   | Heliocentric Cartesian Coordinate (HCC)               | ✓ | x |   |   |   |   |   |   |   |   |   |   |   |   |   |   |
 +   +-------------------------------------------------------+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+
-|   | Helioprojective-Cartesian (HPC)                       |   |   | x |   |   |   |   |   |   |   |   |   |   |   |   |   |
+|   | Helioprojective-Cartesian Coordinate (HPC)            |   |   | x |   |   |   |   |   |   |   |   |   |   |   |   |   |
 +   +-------------------------------------------------------+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+
 |   |                                                       |   |   |   | x |   |   |   |   |   |   |   |   |   |   |   |   |
 +   +-------------------------------------------------------+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+
@@ -59,3 +64,42 @@ Supported Conversions
 |   |                                                       |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | x |
 +---+-------------------------------------------------------+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+
 
+Preconditions
+-------------
+
+* Java >1.6
+
+Binaries/Download
+-----------------
+You can get a compiled version from
+http://helio-dev.cs.technik.fhnw.ch/jenkins/job/helio-coordinate-converter/lastStableBuild/ch.fhnw.i4ds.helio$helio-coordinate-converter/
+
+Alternatively you can use Maven to build it yourself.
+
+* Install Maven
+* ``git clone https://github.com/marcosoldati/helio-coordinate-converter``
+* ``mvn install``
+
+Usage
+-----
+
+Use CoordConverters directly
+````````````````````````````
+
+ConversionOptions opt = Hcc2HgConverter.newConversionOptions().b0InDegree(SAMPLE_B0_IN_DEGREE) ::
+				.l0InDegree(SAMPLE_LO_IN_DEGREE);                                              ::
+HeliocentricCartesianCoordinate hcc = new HeliocentricCartesianCoordinate(13.0, 58.0);         ::
+HeliographicCoordinate hg = converter.convert(hcc, opt);                                       ::
+System.out.println(hcc);                                                                       ::
+System.out.println(hg);                                                                        ::
+
+Use CoordConverterService
+`````````````````````````
+
+Not implemented yet.
+
+
+Custom extensions
+-----------------
+
+TBD

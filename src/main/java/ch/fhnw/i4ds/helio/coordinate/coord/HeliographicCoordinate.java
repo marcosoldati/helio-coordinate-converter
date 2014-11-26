@@ -34,4 +34,12 @@ public class HeliographicCoordinate implements Coordinate {
 	public double getHgLatitudeDegree() {
 		return hgLatitudeDegree;
 	}
+	
+	@Override
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+		sb.append(DESCRIPTION).append(" (").append(ACRONYM).append(") ");
+		sb.append("[").append(hgLongitudeDegree).append("°/").append(hgLatitudeDegree).append("°]");
+		return sb.toString();
+	}
 }

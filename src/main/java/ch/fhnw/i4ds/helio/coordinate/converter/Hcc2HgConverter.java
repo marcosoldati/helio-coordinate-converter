@@ -2,6 +2,7 @@ package ch.fhnw.i4ds.helio.coordinate.converter;
 
 import static ch.fhnw.i4ds.helio.coordinate.util.Constants.SUN_RADIUS;
 import static java.lang.Math.toRadians;
+import static java.lang.Math.toDegrees;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,18 +14,18 @@ import ch.fhnw.i4ds.helio.coordinate.coord.HeliocentricCartesianCoordinate;
 import ch.fhnw.i4ds.helio.coordinate.coord.HeliographicCoordinate;
 
 /**
- * Converter from Stonyhurst Heliographics (HG) to Heliocentric Cartesian
- * coordinates (HCC). This class is thread-safe.
+ * Converter from Heliocentric Cartesian coordinates (HCC) to Stonyhurst
+ * Heliographics (HG). This class is thread-safe.
  * 
  * @author marco soldati at fhnw ch
  * 
  */
-public class Hg2HccConverter extends AbstractConverter<HeliographicCoordinate, HeliocentricCartesianCoordinate> implements
-				CoordConverter<HeliographicCoordinate, HeliocentricCartesianCoordinate> {
+public class Hcc2HgConverter extends AbstractConverter<HeliocentricCartesianCoordinate, HeliographicCoordinate> implements
+				CoordConverter<HeliocentricCartesianCoordinate, HeliographicCoordinate> {
 
 	/**
 	 * Options for this converter. use
-	 * {@link Hg2HccConverter#newConversionOptions()} to get a mutable options
+	 * {@link Hcc2HgConverter#newConversionOptions()} to get a mutable options
 	 * object. The class uses a builder pattern to modify it's properties. E.g.
 	 * 
 	 * <pre>
@@ -33,7 +34,7 @@ public class Hg2HccConverter extends AbstractConverter<HeliographicCoordinate, H
 	 * </pre>
 	 */
 	public static class ConversionOptions implements
-					CoordConversionOptions<CoordConverter<HeliographicCoordinate, HeliocentricCartesianCoordinate>> {
+					CoordConversionOptions<CoordConverter<HeliocentricCartesianCoordinate, HeliographicCoordinate>> {
 		/**
 		 * Tilt of the solar North rotational axis toward the observer
 		 * (heliographic latitude of the observer). FITS: usually given as
@@ -45,13 +46,7 @@ public class Hg2HccConverter extends AbstractConverter<HeliographicCoordinate, H
 		 * Carrington longitude of central meridian as seen from Earth. Default
 		 * is 0.
 		 */
-		private double l0InRad;
-
-		/**
-		 * If true set all points behind the Sun (e.g. not visible) to Nan.
-		 * Defaults to false.
-		 */
-		private boolean occultation = false;
+		private double l0InRad = 0;
 
 		/**
 		 * Solar radius
@@ -88,22 +83,13 @@ public class Hg2HccConverter extends AbstractConverter<HeliographicCoordinate, H
 			this.l0InRad = l0InRad;
 			return this;
 		}
-
+		
 		public double getSunRadiusInMeter() {
 			return sunRadiusInMeter;
 		}
 
 		public ConversionOptions sunRadiusInMeter(double sunRadiusInMeter) {
 			this.sunRadiusInMeter = sunRadiusInMeter;
-			return this;
-		}
-
-		public boolean isOccultation() {
-			return occultation;
-		}
-
-		public ConversionOptions occultation(boolean occultation) {
-			this.occultation = occultation;
 			return this;
 		}
 	}
@@ -122,53 +108,46 @@ public class Hg2HccConverter extends AbstractConverter<HeliographicCoordinate, H
 	}
 
 	@Override
-	public HeliocentricCartesianCoordinate convert(HeliographicCoordinate hg) {
-		return convert(hg, DEFAULT_OPTIONS);
+	public HeliographicCoordinate convert(HeliocentricCartesianCoordinate hcc) {
+		return convert(hcc, DEFAULT_OPTIONS);
 	}
 
 	/**
 	 * Convert with given custom options.
+	 * Implements Eq. (12) of Thompson (2006), A&A, 449, 791.
 	 * 
-	 * @param hg
-	 *            source coordinate.
+	 * @param hcc
+	 *            source coordinate. If z is UNDEFINED the z-coordinate is
+	 *            assumed to be on the Sun.
 	 * @param opt
 	 *            options.
 	 * @return converted coordinates.
 	 */
-	public HeliocentricCartesianCoordinate convert(HeliographicCoordinate hg, ConversionOptions opt) {
-		double lon = toRadians(hg.getHgLongitudeDegree());
-		double lat = toRadians(hg.getHgLatitudeDegree());
-
-		double cosb = Math.cos(opt.getB0InRad());
-		double sinb = Math.sin(opt.getB0InRad());
-
-		lon -= opt.getL0InRad();
-
-		double cosx = Math.cos(lon);
-		double sinx = Math.sin(lon);
-		double cosy = Math.cos(lat);
-		double siny = Math.sin(lat);
-
-		// Perform the conversion.
-		double x = opt.getSunRadiusInMeter() * cosy * sinx;
-		double y = opt.getSunRadiusInMeter() * (siny * cosb - cosy * cosx * sinb);
-		double z = opt.getSunRadiusInMeter() * (siny * sinb + cosy * cosx * cosb);
-
-		if (opt.isOccultation() && z < 0) {
-			x = Double.NaN;
-			y = Double.NaN;
+	public HeliographicCoordinate convert(HeliocentricCartesianCoordinate hcc, ConversionOptions opt) {
+		double x = hcc.getX();
+		double y = hcc.getY();
+		double z = hcc.getZ();
+		if (Double.isNaN(z)) {
+			z = Math.sqrt(opt.getSunRadiusInMeter() * opt.getSunRadiusInMeter() - x * x - y * y);
 		}
+		
+	    double cosb = Math.cos(opt.getB0InRad());
+	    double sinb = Math.sin(opt.getB0InRad());
 
-		return new HeliocentricCartesianCoordinate(x, y, z);
+	    double hecRadius = Math.sqrt(x*x + y*y + z*z);
+	    double hgLongitude = Math.atan2(x, z * cosb - y * sinb) + opt.getL0InRad();
+	    double hgLatitude = Math.asin((y * cosb + z * sinb) / hecRadius);
+
+		return new HeliographicCoordinate(toDegrees(hgLongitude), toDegrees(hgLatitude));
 	}
-	
+
 	/**
 	 * The default implementation just delegates to
 	 * {@link CoordConverter#convert(Coordinate, CoordConversionOptions)},
 	 */
-	public List<HeliocentricCartesianCoordinate> convert(List<HeliographicCoordinate> hgList, ConversionOptions opt) {
-		List<HeliocentricCartesianCoordinate> ret = new ArrayList<HeliocentricCartesianCoordinate>();
-		for (HeliographicCoordinate hg : hgList) {
+	public List<HeliographicCoordinate> convert(List<HeliocentricCartesianCoordinate> hccList, ConversionOptions opt) {
+		List<HeliographicCoordinate> ret = new ArrayList<HeliographicCoordinate>();
+		for (HeliocentricCartesianCoordinate hg : hccList) {
 			ret.add(convert(hg, opt));
 		}
 		return ret;
