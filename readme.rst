@@ -24,7 +24,7 @@ Supported Conversions
 ---------------------
 
 +-+--------------------------------------------+----+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+
-| |                                            | To |   |                                                       |
+| |                                            | To |   |   |   |   |   |                                       |
 +-+--------------------------------------------+----+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+
 | |                                            | H  | H | H |   |   |   |   |   |   |   |   |   |   |   |   |   |
 | |                                            | G  | C | P |   |   |   |   |   |   |   |   |   |   |   |   |   |
@@ -86,15 +86,13 @@ Usage
 Use CoordConverters directly
 ````````````````````````````
 .. code-block:: java
+    ConversionOptions opt = Hcc2HgConverter.newConversionOptions().b0InDegree(SAMPLE_B0_IN_DEGREE)
+         .l0InDegree(SAMPLE_LO_IN_DEGREE);                                                          
+    HeliocentricCartesianCoordinate hcc = new HeliocentricCartesianCoordinate(13.0, 58.0);         
+    HeliographicCoordinate hg = converter.convert(hcc, opt);                                       
+    System.out.println(hcc);                                                                       
+    System.out.println(hg);                                                                      
 
-ConversionOptions opt = Hcc2HgConverter.newConversionOptions().b0InDegree(SAMPLE_B0_IN_DEGREE)
-     .l0InDegree(SAMPLE_LO_IN_DEGREE);                                                          
-HeliocentricCartesianCoordinate hcc = new HeliocentricCartesianCoordinate(13.0, 58.0);         
-HeliographicCoordinate hg = converter.convert(hcc, opt);                                       
-System.out.println(hcc);                                                                       
-System.out.println(hg);                                                                      
-  
-:: 
 
 Use CoordConverterService
 `````````````````````````
