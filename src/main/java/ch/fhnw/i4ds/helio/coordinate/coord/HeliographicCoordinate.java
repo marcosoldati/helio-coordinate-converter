@@ -6,7 +6,7 @@ public class HeliographicCoordinate implements Coordinate {
 
 	private static final String ACRONYM = "HG";
 
-	private static final String DESCRIPTION = "Stonyhurst Heliographic coordinates";
+	private static final String DESCRIPTION = "Stonyhurst Heliographic coordinate";
 
 	@Override
 	public String getCoordinateSystemAcronym() {

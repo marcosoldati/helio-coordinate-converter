@@ -12,7 +12,7 @@ import ch.fhnw.i4ds.helio.coordinate.api.Coordinate;
 public class HeliocentricCartesianCoordinate implements Coordinate {
 
 	private static final String ACRONYM = "HCC";
-	private static final String DESCRIPTION = "Heliocentric-Cartesian coordinates";
+	private static final String DESCRIPTION = "Heliocentric-Cartesian coordinate";
 
 	@Override
 	public String getCoordinateSystemAcronym() {
