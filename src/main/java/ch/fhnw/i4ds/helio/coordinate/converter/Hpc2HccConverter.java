@@ -54,11 +54,11 @@ public class Hpc2HccConverter extends
 	}
 
 	/**
-	 * Convert with given custom options.
+	 * Convert with given custom options. Implements Eq. (15) of Thompson (2006), A&A, 449, 791.
 	 * 
 	 * TODO: this does not take custom sun radius into account.
 	 * @param hpc
-	 *            source coordinate.
+	 *            source coordinate5
 	 * @param opt
 	 *            options.
 	 * @return converted coordinates.
