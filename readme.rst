@@ -6,7 +6,7 @@ Changelog
 ---------
 26-Nov-2014: HG2HCC and HCC2HG
 28-Nov-2014: HPC2HCC and HCC2HPC
-
+02-Dez-2014: Refactor way to pass custom options to converters.
 
 Overview
 --------
@@ -91,8 +91,11 @@ The available converters can be found in package
 
 ::
 
-    ConversionOptions opt = Hcc2HgConverter.newConversionOptions().b0InDegree(SAMPLE_B0_IN_DEGREE)
-         .l0InDegree(SAMPLE_LO_IN_DEGREE);
+	CoordConverter converter = new Hcc2HgConverter();
+	Map<ConverterOption<?>, Object> opt = converter.getCustomOptions();
+	opt.put(ConverterOptions.B0, SAMPLE_B0_IN_RAD);
+	opt.put(ConverterOptions.L0, SAMPLE_L0_IN_RAD);
+	
     HeliocentricCartesianCoordinate hcc = new HeliocentricCartesianCoordinate(13.0, 58.0);
     HeliographicCoordinate hg = converter.convert(hcc, opt);
     System.out.println(hcc);
