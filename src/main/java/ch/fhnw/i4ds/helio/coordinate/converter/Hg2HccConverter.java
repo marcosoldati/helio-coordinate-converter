@@ -23,9 +23,11 @@ import ch.fhnw.i4ds.helio.coordinate.coord.HeliographicCoordinate;
 public class Hg2HccConverter extends AbstractConverter<HeliographicCoordinate, HeliocentricCartesianCoordinate> implements
 				CoordConverter<HeliographicCoordinate, HeliocentricCartesianCoordinate> {
 
+	static final ConverterOption<?>[] DEFAULT_OPTIONS = { B0, L0, SUN_RADIUS, OCCULTATION };
+	
 	@Override
 	protected void populateDefaultOptions(Map<ConverterOption<?>, Object> defaultOptions) {
-		addDefaultOptions(defaultOptions, B0, L0, SUN_RADIUS, OCCULTATION);
+		addDefaultOptions(defaultOptions, DEFAULT_OPTIONS);
 	}
 	
 	/**

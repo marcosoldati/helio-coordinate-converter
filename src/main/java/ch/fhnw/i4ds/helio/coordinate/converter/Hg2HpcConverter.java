@@ -24,8 +24,8 @@ public class Hg2HpcConverter extends
 
 	@Override
 	protected void populateDefaultOptions(Map<ConverterOption<?>, Object> defaultOptions) {
-		addDefaultOptions(defaultOptions, hg2HccConverter.getDefaultOptions().keySet().toArray(new ConverterOption[0]));
-		addDefaultOptions(defaultOptions, hcc2HpcConverter.getDefaultOptions().keySet().toArray(new ConverterOption[0]));
+		addDefaultOptions(defaultOptions, Hg2HccConverter.DEFAULT_OPTIONS);
+		addDefaultOptions(defaultOptions, Hcc2HpcConverter.DEFAULT_OPTIONS);
 	}
 	
 	/**

@@ -22,6 +22,8 @@ public class Hcc2HpcConverter extends
 				AbstractConverter<HeliocentricCartesianCoordinate, HelioprojectiveCartesianCoordinate> implements
 				CoordConverter<HeliocentricCartesianCoordinate, HelioprojectiveCartesianCoordinate> {
 
+	static final ConverterOption<?>[] DEFAULT_OPTIONS = { SUN_DISTANCE };
+	
 	@Override
 	protected void populateDefaultOptions(Map<ConverterOption<?>, Object> defaultOptions) {
 		addDefaultOptions(defaultOptions, SUN_DISTANCE);
