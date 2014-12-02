@@ -1,6 +1,9 @@
 package ch.fhnw.i4ds.helio.coordinate.api;
 
 import java.util.List;
+import java.util.Map;
+
+import ch.fhnw.i4ds.helio.coordinate.converter.option.ConverterOption;
 
 /**
  * Converter between two coordinate systems.
@@ -35,7 +38,7 @@ public interface CoordConverter<S extends Coordinate, T extends Coordinate> {
 	 *            on allowed options. Must not be null.
 	 * @return Converted coordinate, will not be null.
 	 */
-	public T convert(S source, CoordConversionOptions<?> opt);
+	public T convert(S source, Map<ConverterOption<?>, Object> opt);
 
 	/**
 	 * Convert an ordered list of source coordinates to a target system.
@@ -57,5 +60,5 @@ public interface CoordConverter<S extends Coordinate, T extends Coordinate> {
 	 * 
 	 * @return List of converted coordinates.
 	 */
-	public List<T> convert(List<S> sources, CoordConversionOptions<?> opt);
+	public List<T> convert(List<S> sources, Map<ConverterOption<?>, Object> opt);
 }

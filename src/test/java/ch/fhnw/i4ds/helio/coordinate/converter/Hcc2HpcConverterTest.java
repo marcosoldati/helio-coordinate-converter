@@ -1,10 +1,12 @@
 package ch.fhnw.i4ds.helio.coordinate.converter;
 
+import java.util.Map;
+
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import ch.fhnw.i4ds.helio.coordinate.converter.Hcc2HpcConverter.ConversionOptions;
+import ch.fhnw.i4ds.helio.coordinate.converter.option.ConverterOption;
 import ch.fhnw.i4ds.helio.coordinate.coord.HeliocentricCartesianCoordinate;
 import ch.fhnw.i4ds.helio.coordinate.coord.HelioprojectiveCartesianCoordinate;
 import ch.fhnw.i4ds.helio.coordinate.util.Constants;
@@ -22,7 +24,8 @@ public class Hcc2HpcConverterTest {
      */
     @Test
     public void convert_custom_l0_b0() {
-    	ConversionOptions opt = Hcc2HpcConverter.newConversionOptions();
+    	Map<ConverterOption<?>, Object> opt = converter.getCustomOptions();
+
     	HeliocentricCartesianCoordinate hcc = new HeliocentricCartesianCoordinate(28748691, 22998953);
     	
     	HelioprojectiveCartesianCoordinate hpc = converter.convert(hcc, opt);
