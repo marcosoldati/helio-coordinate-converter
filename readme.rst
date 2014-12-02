@@ -4,9 +4,10 @@ Heliophysics coordinate transformation library
 
 Changelog
 ---------
-26-Nov-2014: HG2HCC and HCC2HG
-28-Nov-2014: HPC2HCC and HCC2HPC
-02-Dez-2014: Refactor way to pass custom options to converters.
+
+* 26-Nov-2014: HG2HCC and HCC2HG
+* 28-Nov-2014: HPC2HCC and HCC2HPC
+* 02-Dez-2014: Refactor way to pass custom options to converters.
 
 Overview
 --------
@@ -87,7 +88,7 @@ Usage
 Use CoordConverters directly
 ````````````````````````````
 The available converters can be found in package
-`ch.fhnw.helio.coordinate.converter ./src/main/java/ch/fhnw/i4ds/helio/coordinate/converter#`_
+`ch.fhnw.helio.coordinate.converter <./src/main/java/ch/fhnw/i4ds/helio/coordinate/converter#>`_
 
 ::
 
@@ -96,10 +97,10 @@ The available converters can be found in package
 	opt.put(ConverterOptions.B0, SAMPLE_B0_IN_RAD);
 	opt.put(ConverterOptions.L0, SAMPLE_L0_IN_RAD);
 	
-    HeliocentricCartesianCoordinate hcc = new HeliocentricCartesianCoordinate(13.0, 58.0);
-    HeliographicCoordinate hg = converter.convert(hcc, opt);
-    System.out.println(hcc);
-    System.out.println(hg);
+	HeliocentricCartesianCoordinate hcc = new HeliocentricCartesianCoordinate(13.0, 58.0);
+	HeliographicCoordinate hg = converter.convert(hcc, opt);
+	System.out.println(hcc);
+	System.out.println(hg);
 
 
 Use CoordConverterService
