@@ -29,8 +29,6 @@ public class Hcc2HpcConverterTest {
     	HeliocentricCartesianCoordinate hcc = new HeliocentricCartesianCoordinate(28748691, 22998953);
     	
     	HelioprojectiveCartesianCoordinate hpc = converter.convert(hcc, opt);
-    	System.out.println(hcc);
-    	System.out.println(hpc);
     	
     	Assert.assertEquals(40.0, hpc.getX(), 1.0);
     	Assert.assertEquals(32.0, hpc.getY(), 1.0);
