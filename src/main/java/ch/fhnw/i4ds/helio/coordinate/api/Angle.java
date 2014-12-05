@@ -22,7 +22,7 @@ public class Angle {
 	 * @param deg the degree
 	 * @return the Angle
 	 */
-	public static Angle fromDegree(double deg) {
+	public static Angle fromDeg(double deg) {
 		return new Angle(toRadians(deg));
 	}
 	
@@ -104,7 +104,7 @@ public class Angle {
 	 * @param deg the degree
 	 * @return the Angle
 	 */
-	public void setDegree(double deg) {
+	public void setDeg(double deg) {
 		this.radians = toRadians(deg);
 	}
 	
@@ -131,5 +131,19 @@ public class Angle {
 	 */
 	public void setRad(double rad) {
 		 this.radians = rad;
+	}
+	
+	public String formatDegreeString() {
+		double deg = degValue();
+		StringBuilder sb = new StringBuilder();
+		sb.append(Math.floor(deg)).append("°");
+		sb.append(Math.floor(deg - Math.floor(deg) * ARCMIN_FACTOR)).append("'");
+		sb.append(deg - Math.floor(deg) * ARCSEC_FACTOR).append("''");
+		return sb.toString();
+	}
+
+	@Override
+	public String toString() {
+		return radians + "rad";
 	}
 }
