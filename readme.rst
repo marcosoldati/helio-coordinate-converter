@@ -4,10 +4,12 @@ Heliophysics coordinate transformation library
 
 Changelog
 ---------
-
-* 26-Nov-2014: HG2HCC and HCC2HG
-* 28-Nov-2014: HPC2HCC and HCC2HPC
+* 09-Dez-2014: Switch API to use <Angle> instead of double for angular values.
+* 03-Dez-2014: HPC2HG and HG2HPC
 * 02-Dez-2014: Refactor way to pass custom options to converters.
+* 28-Nov-2014: HPC2HCC and HCC2HPC
+* 26-Nov-2014: HG2HCC and HCC2HG
+
 
 Overview
 --------
@@ -82,11 +84,32 @@ Alternatively you can use Maven to build it yourself.
 * ``git clone https://github.com/marcosoldati/helio-coordinate-converter``
 * ``mvn install``
 
+
+Coordinate Systems
+------------------
+
+Heliocentric Coordinates
+````````````````````````
+
+.. image:: img/hcc.png
+
+
+Heliographic Coordinates
+````````````````````````
+
+The Stonyhurst Heliographic Coordinate System is relative to the Earth. Its Zero-meridian is at the intersection of the 
+Sun's equator and central meridian as seen from the Earth. Longitude raises towards west. Latitude raises towards north. 
+
+The Carrington Helio coordiante systems are relative to an approximately fixed point on the Sun surface. 
+The Carrigton position can be looked up from the 
+`astronomical almanac <http://en.wikipedia.org/wiki/Astronomical_Almanac>`_.
+
 Usage
 -----
 
 Use CoordConverters directly
 ````````````````````````````
+
 The available converters can be found in package
 `ch.fhnw.helio.coordinate.converter <./src/main/java/ch/fhnw/i4ds/helio/coordinate/converter#>`_
 
@@ -97,7 +120,7 @@ The available converters can be found in package
 	opt.put(ConverterOptions.B0, SAMPLE_B0_IN_RAD);
 	opt.put(ConverterOptions.L0, SAMPLE_L0_IN_RAD);
 	
-	HeliocentricCartesianCoordinate hcc = new HeliocentricCartesianCoordinate(13.0, 58.0);
+	HeliocentricCartesianCoordinate hcc = new HeliocentricCartesianCoordinate(Angle.fromDeg(13.0), Angle.fromDeg(58.0));
 	HeliographicCoordinate hg = converter.convert(hcc, opt);
 	System.out.println(hcc);
 	System.out.println(hg);
