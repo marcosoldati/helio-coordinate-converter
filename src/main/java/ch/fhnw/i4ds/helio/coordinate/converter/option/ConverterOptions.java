@@ -1,17 +1,18 @@
 package ch.fhnw.i4ds.helio.coordinate.converter.option;
 
+import ch.fhnw.i4ds.helio.coordinate.api.Angle;
 import ch.fhnw.i4ds.helio.coordinate.util.Constants;
 import ch.fhnw.i4ds.helio.coordinate.util.Unit;
 
 public class ConverterOptions {
 
-	public static ConverterOption<Double> B0 = newOption("b0",
+	public static ConverterOption<Angle> B0 = newOption("b0",
 					"Tilt of the solar North rotational axis toward the observer (heliographic"
 									+ "latitude of the observer). This is a synonym of SOLAR_B0, HGLT_OBS, and"
-									+ "CRLT_OBS. Default is 0.", 0.0, Unit.RADIANS);
+									+ "CRLT_OBS. Default is 0.", new Angle(0.0), Unit.ANGLE);
 
-	public static ConverterOption<Double> L0 = newOption("l0",
-					"Carrington longitude of central meridian as seen from Earth. Default is 0", 0.0, Unit.RADIANS);
+	public static ConverterOption<Angle> L0 = newOption("l0",
+					"Carrington longitude of central meridian as seen from Earth. Default is 0", new Angle(0.0), Unit.ANGLE);
 
 	public static ConverterOption<Boolean> OCCULTATION = newOption("occultation",
 					"If true set all points behind the Sun (e.g. not visible) to Nan. Defaults to false", false,

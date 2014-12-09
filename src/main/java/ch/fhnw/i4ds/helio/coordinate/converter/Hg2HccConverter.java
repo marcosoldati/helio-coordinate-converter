@@ -7,6 +7,7 @@ import static ch.fhnw.i4ds.helio.coordinate.converter.option.ConverterOptions.SU
 
 import java.util.Map;
 
+import ch.fhnw.i4ds.helio.coordinate.api.Angle;
 import ch.fhnw.i4ds.helio.coordinate.api.CoordConverter;
 import ch.fhnw.i4ds.helio.coordinate.converter.option.ConverterOption;
 import ch.fhnw.i4ds.helio.coordinate.coord.HeliocentricCartesianCoordinate;
@@ -40,8 +41,8 @@ public class Hg2HccConverter extends AbstractConverter<HeliographicCoordinate, H
 	 */
 	@Override
 	public HeliocentricCartesianCoordinate convert(HeliographicCoordinate hg, Map<ConverterOption<?>, Object> opt) {
-		double b0 = (Double) opt.get(B0);
-		double l0 = (Double) opt.get(L0);
+		double b0 = ((Angle) opt.get(B0)).radValue();
+		double l0 = ((Angle) opt.get(L0)).radValue();
 		double sunRadius = (Double) opt.get(SUN_RADIUS);
 		boolean occultation = (Boolean) opt.get(OCCULTATION);
 		

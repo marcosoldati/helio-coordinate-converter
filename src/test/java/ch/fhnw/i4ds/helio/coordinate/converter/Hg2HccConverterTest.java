@@ -15,8 +15,9 @@ import ch.fhnw.i4ds.helio.coordinate.coord.HeliocentricCartesianCoordinate;
 import ch.fhnw.i4ds.helio.coordinate.coord.HeliographicCoordinate;
 
 public class Hg2HccConverterTest {
-	private static final double SAMPLE_L0_IN_RAD = 0;
-	private static final double SAMPLE_B0_IN_RAD = Math.toRadians(-7.064078);
+	private static final Angle SAMPLE_L0 = Angle.fromRad(0);
+	private static final Angle SAMPLE_B0 = Angle.fromDeg(-7.064078);
+
 
 	private Hg2HccConverter converter;
 
@@ -43,8 +44,8 @@ public class Hg2HccConverterTest {
 	@Test
 	public void convert_custom_l0_b0() {
 		Map<ConverterOption<?>, Object> opt = converter.getCustomOptions();
-		opt.put(ConverterOptions.B0, SAMPLE_B0_IN_RAD);
-		opt.put(ConverterOptions.L0, SAMPLE_L0_IN_RAD);
+		opt.put(ConverterOptions.B0, SAMPLE_B0);
+		opt.put(ConverterOptions.L0, SAMPLE_L0);
 
 		HeliographicCoordinate hg = new HeliographicCoordinate(Angle.fromDeg(34.0), Angle.fromDeg(96.0));
 		HeliocentricCartesianCoordinate hcc = converter.convert(hg, opt);
@@ -59,8 +60,8 @@ public class Hg2HccConverterTest {
 	@Test
 	public void convert_custom_halfsunradius() {
 		Map<ConverterOption<?>, Object> opt = converter.getCustomOptions();
-		opt.put(ConverterOptions.B0, SAMPLE_B0_IN_RAD);
-		opt.put(ConverterOptions.L0, SAMPLE_L0_IN_RAD);
+		opt.put(ConverterOptions.B0, SAMPLE_B0);
+		opt.put(ConverterOptions.L0, SAMPLE_L0);
 		opt.put(ConverterOptions.SUN_RADIUS, (Double) opt.get(ConverterOptions.SUN_RADIUS) / 2);
 
 		HeliographicCoordinate hg = new HeliographicCoordinate(Angle.fromDeg(34.0), Angle.fromDeg(96.0));
@@ -72,8 +73,8 @@ public class Hg2HccConverterTest {
 	@Test
 	public void convert_custom_occulation() {
 		Map<ConverterOption<?>, Object> opt = converter.getCustomOptions();
-		opt.put(ConverterOptions.B0, SAMPLE_B0_IN_RAD);
-		opt.put(ConverterOptions.L0, SAMPLE_L0_IN_RAD);
+		opt.put(ConverterOptions.B0, SAMPLE_B0);
+		opt.put(ConverterOptions.L0, SAMPLE_L0);
 		opt.put(ConverterOptions.OCCULTATION, true);
 
 		HeliographicCoordinate hg = new HeliographicCoordinate(Angle.fromDeg(34.0), Angle.fromDeg(96.0));
@@ -85,8 +86,8 @@ public class Hg2HccConverterTest {
 	@Test
 	public void convert_list() {
 		Map<ConverterOption<?>, Object> opt = converter.getCustomOptions();
-		opt.put(ConverterOptions.B0, SAMPLE_B0_IN_RAD);
-		opt.put(ConverterOptions.L0, SAMPLE_L0_IN_RAD);
+		opt.put(ConverterOptions.B0, SAMPLE_B0);
+		opt.put(ConverterOptions.L0, SAMPLE_L0);
 
 		HeliographicCoordinate hg1 = new HeliographicCoordinate(Angle.fromDeg(34.0), Angle.fromDeg(96.0));
 		HeliographicCoordinate hg2 = new HeliographicCoordinate(Angle.fromDeg(55.0), Angle.fromDeg(56.0));

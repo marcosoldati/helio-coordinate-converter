@@ -12,9 +12,7 @@ public enum Unit {
 	NONE(""),
 	
 	METER ("m"),
-	RADIANS("rad"),
-	DEGREE("°"),
-	ARCSEC("''");
+	ANGLE("");
 	
 	private final String symbol;
 

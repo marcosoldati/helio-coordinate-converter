@@ -43,8 +43,8 @@ public class Hcc2HgConverter extends AbstractConverter<HeliocentricCartesianCoor
 	@Override
 	public HeliographicCoordinate convert(HeliocentricCartesianCoordinate hcc, Map<ConverterOption<?>, Object> opt) {
 		double sunRadius = (Double)opt.get(SUN_RADIUS);
-		double b0 = (Double)opt.get(B0);
-		double l0 = (Double)opt.get(L0);
+		double b0 = ((Angle)opt.get(B0)).radValue();
+		double l0 = ((Angle)opt.get(L0)).radValue();
 		double x = hcc.getX();
 		double y = hcc.getY();
 		double z = hcc.getZ();
