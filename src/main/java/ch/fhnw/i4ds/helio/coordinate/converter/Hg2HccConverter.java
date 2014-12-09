@@ -4,7 +4,6 @@ import static ch.fhnw.i4ds.helio.coordinate.converter.option.ConverterOptions.B0
 import static ch.fhnw.i4ds.helio.coordinate.converter.option.ConverterOptions.L0;
 import static ch.fhnw.i4ds.helio.coordinate.converter.option.ConverterOptions.OCCULTATION;
 import static ch.fhnw.i4ds.helio.coordinate.converter.option.ConverterOptions.SUN_RADIUS;
-import static java.lang.Math.toRadians;
 
 import java.util.Map;
 
@@ -46,8 +45,8 @@ public class Hg2HccConverter extends AbstractConverter<HeliographicCoordinate, H
 		double sunRadius = (Double) opt.get(SUN_RADIUS);
 		boolean occultation = (Boolean) opt.get(OCCULTATION);
 		
-		double lon = toRadians(hg.getHgLongitudeDegree());
-		double lat = toRadians(hg.getHgLatitudeDegree());
+		double lon = hg.getHgLongitude().radValue();
+		double lat = hg.getHgLatitude().radValue();
 
 		double cosb = Math.cos(b0);
 		double sinb = Math.sin(b0);

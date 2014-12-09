@@ -1,5 +1,6 @@
 package ch.fhnw.i4ds.helio.coordinate.coord;
 
+import ch.fhnw.i4ds.helio.coordinate.api.Angle;
 import ch.fhnw.i4ds.helio.coordinate.api.Coordinate;
 
 public class HeliographicCoordinate implements Coordinate {
@@ -18,28 +19,28 @@ public class HeliographicCoordinate implements Coordinate {
 		return DESCRIPTION;
 	}
 
-	private final double hgLongitudeDegree;
+	private final Angle hgLongitude;
 
-	private final double hgLatitudeDegree;
+	private final Angle hgLatitude;
 
-	public HeliographicCoordinate(double hgLongitudeDegree, double hgLatitudeDegree) {
-		this.hgLongitudeDegree = hgLongitudeDegree;
-		this.hgLatitudeDegree = hgLatitudeDegree;
+	public HeliographicCoordinate(Angle hgLongitude, Angle hgLatitude) {
+		this.hgLongitude = hgLongitude;
+		this.hgLatitude = hgLatitude;
 	}
 	
-	public double getHgLongitudeDegree() {
-		return hgLongitudeDegree;
+	public Angle getHgLongitude() {
+		return hgLongitude;
 	}
 	
-	public double getHgLatitudeDegree() {
-		return hgLatitudeDegree;
+	public Angle getHgLatitude() {
+		return hgLatitude;
 	}
 	
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
 		sb.append(DESCRIPTION).append(" (").append(ACRONYM).append(") ");
-		sb.append("[").append(hgLongitudeDegree).append("°/").append(hgLatitudeDegree).append("°]");
+		sb.append("[").append(hgLongitude.degValue()).append("°/").append(hgLatitude.degValue()).append("°]");
 		return sb.toString();
 	}
 }

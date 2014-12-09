@@ -3,10 +3,10 @@ package ch.fhnw.i4ds.helio.coordinate.converter;
 import static ch.fhnw.i4ds.helio.coordinate.converter.option.ConverterOptions.B0;
 import static ch.fhnw.i4ds.helio.coordinate.converter.option.ConverterOptions.L0;
 import static ch.fhnw.i4ds.helio.coordinate.converter.option.ConverterOptions.SUN_RADIUS;
-import static java.lang.Math.toDegrees;
 
 import java.util.Map;
 
+import ch.fhnw.i4ds.helio.coordinate.api.Angle;
 import ch.fhnw.i4ds.helio.coordinate.api.CoordConverter;
 import ch.fhnw.i4ds.helio.coordinate.converter.option.ConverterOption;
 import ch.fhnw.i4ds.helio.coordinate.coord.HeliocentricCartesianCoordinate;
@@ -56,9 +56,9 @@ public class Hcc2HgConverter extends AbstractConverter<HeliocentricCartesianCoor
 		double sinb = Math.sin(b0);
 
 		double hecRadius = Math.sqrt(x * x + y * y + z * z);
-		double hgLongitude = Math.atan2(x, z * cosb - y * sinb) + l0;
-		double hgLatitude = Math.asin((y * cosb + z * sinb) / hecRadius);
+		Angle hgLongitude = Angle.fromRad(Math.atan2(x, z * cosb - y * sinb) + l0);
+		Angle hgLatitude = Angle.fromRad(Math.asin((y * cosb + z * sinb) / hecRadius));
 
-		return new HeliographicCoordinate(toDegrees(hgLongitude), toDegrees(hgLatitude));
+		return new HeliographicCoordinate(hgLongitude, hgLatitude);
 	}
 }

@@ -1,10 +1,10 @@
 package ch.fhnw.i4ds.helio.coordinate.converter;
 
 import static ch.fhnw.i4ds.helio.coordinate.converter.option.ConverterOptions.SUN_DISTANCE;
-import static java.lang.Math.toDegrees;
 
 import java.util.Map;
 
+import ch.fhnw.i4ds.helio.coordinate.api.Angle;
 import ch.fhnw.i4ds.helio.coordinate.api.CoordConverter;
 import ch.fhnw.i4ds.helio.coordinate.converter.option.ConverterOption;
 import ch.fhnw.i4ds.helio.coordinate.coord.HeliocentricCartesianCoordinate;
@@ -57,13 +57,9 @@ public class Hcc2HpcConverter extends
 
 		double zeta = sunDistance - z;
 		double distance = Math.sqrt(x * x + y * y + zeta * zeta);
-		double hpcx = radiansToArcsec(Math.atan2(x, zeta));
-		double hpcy = radiansToArcsec(Math.asin(y / distance));
+		Angle hpcx = Angle.fromRad((Math.atan2(x, zeta)));
+		Angle hpcy = Angle.fromRad(Math.asin(y / distance));
 
 		return new HelioprojectiveCartesianCoordinate(hpcx, hpcy, sunDistance);
-	}
-
-	private double radiansToArcsec(double radians) {
-		return toDegrees(radians) * 3600;
 	}
 }

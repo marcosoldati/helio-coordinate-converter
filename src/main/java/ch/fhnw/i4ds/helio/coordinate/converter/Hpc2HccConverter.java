@@ -1,7 +1,5 @@
 package ch.fhnw.i4ds.helio.coordinate.converter;
 
-import static java.lang.Math.toRadians;
-
 import java.util.Map;
 
 import ch.fhnw.i4ds.helio.coordinate.api.CoordConverter;
@@ -42,10 +40,10 @@ public class Hpc2HccConverter extends
 	@Override
 	public HeliocentricCartesianCoordinate convert(HelioprojectiveCartesianCoordinate hpc,
 					Map<ConverterOption<?>, Object> opt) {
-		double cosx = Math.cos(arcsecToRadians(hpc.getX()));
-		double sinx = Math.sin(arcsecToRadians(hpc.getX()));
-		double cosy = Math.cos(arcsecToRadians(hpc.getY()));
-		double siny = Math.sin(arcsecToRadians(hpc.getY()));
+		double cosx = Math.cos(hpc.getX().radValue());
+		double sinx = Math.sin(hpc.getX().radValue());
+		double cosy = Math.cos(hpc.getY().radValue());
+		double siny = Math.sin(hpc.getY().radValue());
 
 		double sunRadius = Constants.SUN_RADIUS.getValue();
 		double sunDistance = hpc.getSunDistance();
@@ -58,9 +56,5 @@ public class Hpc2HccConverter extends
 		double ry = distance * siny;
 		double rz = sunDistance - distance * cosy * cosx;
 		return new HeliocentricCartesianCoordinate(rx, ry, rz);
-	}
-
-	private double arcsecToRadians(double arcsec) {
-		return toRadians(arcsec / (60.0 * 60.0));
 	}
 }

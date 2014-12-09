@@ -32,7 +32,7 @@ public class Hcc2HgConverterTest {
     	
     	HeliocentricCartesianCoordinate hcc = new HeliocentricCartesianCoordinate(13.0, 58.0);
     	HeliographicCoordinate hg = converter.convert(hcc, opt);
-    	Assert.assertEquals(1.0791282e-06, hg.getHgLongitudeDegree(), 1.0);
-    	Assert.assertEquals(-7.0640732, hg.getHgLatitudeDegree(), 1.0);
+    	Assert.assertEquals(1.0791282e-06, hg.getHgLongitude().degValue(), 1e-10);
+    	Assert.assertEquals(-7.0640732, hg.getHgLatitude().degValue(), 1e-6);
     }
 }
