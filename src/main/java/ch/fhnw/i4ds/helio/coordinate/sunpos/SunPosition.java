@@ -2,78 +2,80 @@ package ch.fhnw.i4ds.helio.coordinate.sunpos;
 
 import org.joda.time.DateTime;
 
+import ch.fhnw.i4ds.helio.coordinate.api.Angle;
+
 public class SunPosition {
 	/**
 	 * Date for this position of the sun.
 	 */
 	private final DateTime dateTime;
-	
-	/**
-	 * Longitude of sun for mean equinox of date (degs)
-	 */
-	private double longitudeInDegree;
-	
-	/**
-	 * Apparent RA for true equinox of date (degs)
-	 */
-	private double ra;
-	
-	/**
-	 * Apparent declination for true equinox of date (degs)
-	 */
-	private double dec;
 
 	/**
-	 * Apparent longitude (degs)
+	 * Longitude of sun for mean equinox of date
 	 */
-	private double apparentLongitude;
-	
+	private Angle longitude;
+
 	/**
-	 * True obliquity (degs)
+	 * Apparent RA for true equinox of date
 	 */
-	private double obliquity;
-	
+	private Angle ra;
+
+	/**
+	 * Apparent declination for true equinox of date
+	 */
+	private Angle dec;
+
+	/**
+	 * Apparent longitude
+	 */
+	private Angle apparentLongitude;
+
+	/**
+	 * True obliquity
+	 */
+	private Angle obliquity;
+
 	public SunPosition(DateTime dateTime) {
 		this.dateTime = dateTime;
 	}
 
-	public double getLongitudeInDegree() {
-		return longitudeInDegree;
+	public Angle getLongitude() {
+		return longitude;
 	}
 
-	public void setLongitudeInDegree(double longitudeInDegree) {
-		this.longitudeInDegree = longitudeInDegree;
+	public void setLongitude(Angle longitude) {
+		this.longitude = longitude;
 	}
 
-	public double getRa() {
+	public Angle getRa() {
 		return ra;
 	}
 
-	public void setRa(double ra) {
+	public void setRa(Angle ra) {
 		this.ra = ra;
 	}
 
-	public double getDec() {
+	public Angle getDec() {
 		return dec;
 	}
 
-	public void setDec(double dec) {
+	public void setDec(Angle dec) {
 		this.dec = dec;
 	}
 
-	public double getApparentLongitude() {
+	public Angle getApparentLongitude() {
 		return apparentLongitude;
 	}
 
-	public void setApparentLongitude(double apparentLongitude) {
+	public void setApparentLongitude(Angle apparentLongitude) {
 		this.apparentLongitude = apparentLongitude;
 	}
 
-	public double getObliquity() {
+	public Angle getObliquity() {
 		return obliquity;
 	}
-	
-	public void setObliquity(double obliquity) {
+
+	public void setObliquity(Angle obliquity) {
 		this.obliquity = obliquity;
 	}
 
@@ -84,12 +86,11 @@ public class SunPosition {
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
-		builder.append("SunPosition [dateTime=").append(dateTime).append(", longitudeInDegree=")
-						.append(longitudeInDegree).append(", ra=").append(ra).append(", dec=").append(dec)
-						.append(", apparentLongitude=").append(apparentLongitude).append(", obliquity=")
-						.append(obliquity).append("]");
+		builder.append("SunPosition [dateTime=").append(dateTime).append(", longitude=").append(longitude.degValue())
+						.append("°, ra=").append(ra.degValue()).append("°, dec=").append(dec.degValue())
+						.append("°, apparentLongitude=").append(apparentLongitude).append("°, obliquity=")
+						.append(obliquity.degValue()).append("°]");
 		return builder.toString();
 	}
-	
-	
+
 }

@@ -21,10 +21,10 @@ public class NewcombSunPositionAlgoTest {
 		DateTime date = new DateTime(2013, 03, 27, 0, 0, DateTimeZone.UTC);
 		SunPosition sunPosition = sunPositionAlgo.computeSunPos(date);
 		
-		assertEquals(6.4851737387786201, sunPosition.getLongitudeInDegree(), 1e-10);
-		assertEquals(5.9522821787012701, sunPosition.getRa(), 1e-10);
-		assertEquals(2.5738385484611932, sunPosition.getDec(), 1e-10);
-		assertEquals(6.4830899654298086, sunPosition.getApparentLongitude(), 1e-10);
-		assertEquals(23.435885888864924, sunPosition.getObliquity(), 1e-10);
+		assertEquals(6.4851737387786201, sunPosition.getLongitude().degValue(), 1e-10);
+		assertEquals(5.9522821787012701, sunPosition.getRa().degValue(), 1e-10);
+		assertEquals(2.5738385484611932, sunPosition.getDec().degValue(), 1e-10);
+		assertEquals(6.4830899654298086, sunPosition.getApparentLongitude().degValue(), 1e-10);
+		assertEquals(23.435885888864924, sunPosition.getObliquity().degValue(), 1e-10);
 	}
 }

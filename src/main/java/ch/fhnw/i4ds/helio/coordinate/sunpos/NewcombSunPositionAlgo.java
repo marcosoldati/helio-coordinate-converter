@@ -4,11 +4,12 @@ import static java.lang.Math.asin;
 import static java.lang.Math.atan2;
 import static java.lang.Math.cos;
 import static java.lang.Math.sin;
-import static java.lang.Math.toDegrees;
 import static java.lang.Math.toRadians;
 
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeUtils;
+
+import ch.fhnw.i4ds.helio.coordinate.api.Angle;
 
 /**
  * Use a simplified method of Newcomb's Sun to compute the Sun's position. This
@@ -92,24 +93,22 @@ public class NewcombSunPositionAlgo implements SunPositionAlgo {
 		// Form Right Ascension and Declination
 		l = l / 3600.0;
 
-		double ra = toDegrees(atan2(sin(toRadians(l)) * cos(toRadians(oblt)), cos(toRadians(l))));
+		double ra = atan2(sin(toRadians(l)) * cos(toRadians(oblt)), cos(toRadians(l)));
 
 		if (ra < 0.0) {
 			ra = ra + 360.0;
 		}
 
-		double dec = toDegrees(asin(sin(toRadians(l)) * sin(toRadians(oblt))));
+		double dec = asin(sin(toRadians(l)) * sin(toRadians(oblt)));
 
-		// convert the internal variables to those listed in the top of the
-		// comment section in this code and in the original IDL code.
+		// convert the internal variables to those required by the result.
 		SunPosition sunPosition = new SunPosition(date);
-		sunPosition.setLongitudeInDegree(longmed);
-		sunPosition.setRa(ra);
-		sunPosition.setDec(dec);
-		sunPosition.setApparentLongitude(l);
-		sunPosition.setObliquity(oblt);
+		sunPosition.setLongitude(Angle.fromDeg(longmed));
+		sunPosition.setRa(Angle.fromRad(ra));
+		sunPosition.setDec(Angle.fromRad(dec));
+		sunPosition.setApparentLongitude(Angle.fromDeg(l));
+		sunPosition.setObliquity(Angle.fromDeg(oblt));
 
 		return sunPosition;
 	}
-
 }
