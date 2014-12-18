@@ -96,13 +96,16 @@ Heliocentric Coordinates
 
 Heliographic Coordinates
 ````````````````````````
+.. image:: img/hg.png
 
-The Stonyhurst Heliographic Coordinate System is relative to the Earth. Its Zero-meridian is at the intersection of the 
+The Stonyhurst Heliographic coordinate system is relative to the Earth. Its Zero-meridian is at the intersection of the 
 Sun's equator and central meridian as seen from the Earth. Longitude raises towards west. Latitude raises towards north. 
 
-The Carrington Helio coordiante systems are relative to an approximately fixed point on the Sun surface. 
-The Carrigton position can be looked up from the 
+The Carrington Heliographic coordinate system is relative to an approximately fixed point on the Sun surface.
+The Carrigton longitude can be looked up from the 
 `astronomical almanac <http://en.wikipedia.org/wiki/Astronomical_Almanac>`_.
+
+The latitude is the same for Carrington and Stonyhurst heliographic coordinate systems.
 
 Usage
 -----
