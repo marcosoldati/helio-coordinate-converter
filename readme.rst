@@ -112,6 +112,20 @@ The Carrington longitude can be looked up from the
 
 The latitude is the same for Carrington and Stonyhurst heliographic coordinate systems.
 
+Helioprojective Coordinates
+```````````````````````````
+
+Helioprojective are 2D coordinates relative to an observer. They are either expressed in Meters or 
+by the angle seen from the observer (in arcsecs). The latter value is relative as it depends on the distance of the 
+observer from the Sun. E.g a satellite in `Lagrange point L1 <http://en.wikipedia.org/wiki/Lagrangian_point>`_ 
+is approximately 1% closer to the Sun than the Earth, thus the angle is slightly larger. 
+
+.. image:: img/hpc.png
+
+*Figure 3: Visualisation of a Helioprojective coordinate system. X and Y can be in Meters or in arcsecs as seen from 
+the observer*
+
+
 Usage
 -----
 
