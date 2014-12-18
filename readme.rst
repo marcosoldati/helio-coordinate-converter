@@ -91,18 +91,23 @@ Coordinate Systems
 Heliocentric Coordinates
 ````````````````````````
 
+Heliocentric coordinates origin in the Sun center. Units are in Meter.
+
 .. image:: img/hcc.png
 
+//Figure 1: Visualisation of a Heliocentric Cartesian coordinate system//
 
 Heliographic Coordinates
 ````````````````````````
 .. image:: img/hg.png
 
+// Figure 2: Visualisation of a Heliographic coordinate system//
+
 The Stonyhurst Heliographic coordinate system is relative to the Earth. Its Zero-meridian is at the intersection of the 
 Sun's equator and central meridian as seen from the Earth. Longitude raises towards west. Latitude raises towards north. 
 
 The Carrington Heliographic coordinate system is relative to an approximately fixed point on the Sun surface.
-The Carrigton longitude can be looked up from the 
+The Carrington longitude can be looked up from the 
 `astronomical almanac <http://en.wikipedia.org/wiki/Astronomical_Almanac>`_.
 
 The latitude is the same for Carrington and Stonyhurst heliographic coordinate systems.
