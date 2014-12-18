@@ -95,13 +95,13 @@ Heliocentric coordinates origin in the Sun center. Units are in Meter.
 
 .. image:: img/hcc.png
 
-//Figure 1: Visualisation of a Heliocentric Cartesian coordinate system//
+*Figure 1: Visualisation of a Heliocentric Cartesian coordinate system*
 
 Heliographic Coordinates
 ````````````````````````
 .. image:: img/hg.png
 
-// Figure 2: Visualisation of a Heliographic coordinate system//
+*Figure 2: Visualisation of a Heliographic coordinate system*
 
 The Stonyhurst Heliographic coordinate system is relative to the Earth. Its Zero-meridian is at the intersection of the 
 Sun's equator and central meridian as seen from the Earth. Longitude raises towards west. Latitude raises towards north. 
