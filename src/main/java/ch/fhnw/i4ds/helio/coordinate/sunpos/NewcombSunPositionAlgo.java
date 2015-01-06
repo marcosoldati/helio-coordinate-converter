@@ -7,9 +7,9 @@ import static java.lang.Math.sin;
 import static java.lang.Math.toRadians;
 
 import org.joda.time.DateTime;
-import org.joda.time.DateTimeUtils;
 
 import ch.fhnw.i4ds.helio.coordinate.api.Angle;
+import ch.fhnw.i4ds.helio.coordinate.util.JulianDateUtils;
 
 /**
  * Use a simplified method of Newcomb's Sun to compute the Sun's position. This
@@ -20,15 +20,9 @@ import ch.fhnw.i4ds.helio.coordinate.api.Angle;
  * 
  */
 public class NewcombSunPositionAlgo implements SunPositionAlgo {
-
-	/**
-	 * Julian date for January, 1st, 1900.
-	 */
-	private static final double JAN_1_1900 = 2415020.0;
-
 	@Override
 	public SunPosition computeSunPos(DateTime date) {
-		double dd = DateTimeUtils.toJulianDay(date.getMillis()) - JAN_1_1900;
+		double dd = JulianDateUtils.julianDaySinceJ19000101(date);
 
 		// form time in Julian centuries from 1900.0
 		double t = dd / 36525.0;
