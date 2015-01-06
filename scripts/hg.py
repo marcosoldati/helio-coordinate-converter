@@ -70,8 +70,8 @@ ax.add_artist(x)
 ax.add_artist(y)
 
 # Labels
-ax.text(2.2, 1.5, 0.1, 'latitude')
-ax.text(2.2, -0.5, 1.5, 'longitude')
+ax.text(2.2, 1.5, 0.1, 'longitude')
+ax.text(2.2, -0.5, 1.5, 'latitude')
 ax.text(10, -1, 0.5, 'Earth')
 ax.text(0, -1.8, 1.8, 'Sun')
 
