@@ -14,11 +14,11 @@ Changelog
 Overview
 --------
 This Java library supports transformation between various Heliophysics coordinate systems. It builds on a flexible API 
-such that new algorithms can be easily added.
+such that new algorithms can be added easily.
 
 It comes with a couple of unit tests to verify the conversion. 
 
-Most of this library has been ported from Sunpy: http://docs.sunpy.org/en/stable/code_ref/wcs.html.
+Most of this library has been ported from IDL and Sunpy: http://docs.sunpy.org/en/stable/code_ref/wcs.html.
 
 Sunpy's implementation is based on  Thompson (2006), A&A, 449, 791 http://dx.doi.org/10.1051/0004-6361:20054262
 PDF http://fits.gsfc.nasa.gov/wcs/coordinates.pdf
@@ -30,18 +30,19 @@ Supported Conversions
 +---+-------------------------------------------------------+---------------------------------------------------------------+
 |   |                                                       |                            To                                 |
 +---+-------------------------------------------------------+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+
-|   |                                                       | H | H | H |   |   |   |   |   |   |   |   |   |   |   |   |   |
-|   |                                                       | G | C | P |   |   |   |   |   |   |   |   |   |   |   |   |   |
-|   |                                                       |   | C | C |   |   |   |   |   |   |   |   |   |   |   |   |   |
-|   |                                                       |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |
+|   |                                                       | H | H | H | H |   |   |   |   |   |   |   |   |   |   |   |   |
+|   |                                                       | G | C | P | G |   |   |   |   |   |   |   |   |   |   |   |   |
+|   |                                                       |   | C | C | R |   |   |   |   |   |   |   |   |   |   |   |   |
+|   |                                                       |   |   |   | T |   |   |   |   |   |   |   |   |   |   |   |   |
+|   |                                                       |   |   |   | N |   |   |   |   |   |   |   |   |   |   |   |   |
 +===+=======================================================+===+===+===+===+===+===+===+===+===+===+===+===+===+===+===+===+
-|   | Stonyhurst Heliographic Coordinate (HG)               | x | ✓ | ✓ |   |   |   |   |   |   |   |   |   |   |   |   |   |
+|   | Stonyhurst Heliographic Coordinate (HG)               | x | ✓ | ✓ | - |   |   |   |   |   |   |   |   |   |   |   |   |
 +   +-------------------------------------------------------+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+
-|   | Heliocentric Cartesian Coordinate (HCC)               | ✓ | x | ✓ |   |   |   |   |   |   |   |   |   |   |   |   |   |
+|   | Heliocentric Cartesian Coordinate (HCC)               | ✓ | x | ✓ | ✓ |   |   |   |   |   |   |   |   |   |   |   |   |
 +   +-------------------------------------------------------+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+
-|   | Helioprojective-Cartesian Coordinate (HPC)            | ✓ | ✓ | x |   |   |   |   |   |   |   |   |   |   |   |   |   |
+|   | Helioprojective-Cartesian Coordinate (HPC)            | ✓ | ✓ | x | - |   |   |   |   |   |   |   |   |   |   |   |   |
 +   +-------------------------------------------------------+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+
-|   |                                                       |   |   |   | x |   |   |   |   |   |   |   |   |   |   |   |   |
+|   | Heliographic Radial-Tangential-Normal Coord (HGRTN)   | - | ✓ | - | x |   |   |   |   |   |   |   |   |   |   |   |   |
 +   +-------------------------------------------------------+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+
 |   |                                                       |   |   |   |   | x |   |   |   |   |   |   |   |   |   |   |   |
 +   +-------------------------------------------------------+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+
@@ -96,6 +97,9 @@ Heliocentric coordinates origin in the Sun center. Units are in Meter.
 .. image:: img/hcc.png
 
 *Figure 1: Visualisation of a Heliocentric Cartesian coordinate system*
+
+Heliographic (in this context: heliocentric) Radial-Tangential-Normal (HGRTN) Coordinate System is a variant of HCC 
+where x=y, y=z and z=x
 
 Heliographic Coordinates
 ````````````````````````
