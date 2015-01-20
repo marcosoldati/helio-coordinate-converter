@@ -88,4 +88,40 @@ public class HelioprojectiveCartesianCoordinate implements Coordinate {
 						.append("]");
 		return sb.toString();
 	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		long temp;
+		temp = Double.doubleToLongBits(sunDistance);
+		result = prime * result + (int) (temp ^ (temp >>> 32));
+		result = prime * result + ((x == null) ? 0 : x.hashCode());
+		result = prime * result + ((y == null) ? 0 : y.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		HelioprojectiveCartesianCoordinate other = (HelioprojectiveCartesianCoordinate) obj;
+		if (Double.doubleToLongBits(sunDistance) != Double.doubleToLongBits(other.sunDistance))
+			return false;
+		if (x == null) {
+			if (other.x != null)
+				return false;
+		} else if (!x.equals(other.x))
+			return false;
+		if (y == null) {
+			if (other.y != null)
+				return false;
+		} else if (!y.equals(other.y))
+			return false;
+		return true;
+	}
 }

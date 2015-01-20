@@ -43,4 +43,35 @@ public class HeliographicCoordinate implements Coordinate {
 		sb.append("[").append(hgLongitude.degValue()).append("°/").append(hgLatitude.degValue()).append("°]");
 		return sb.toString();
 	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((hgLatitude == null) ? 0 : hgLatitude.hashCode());
+		result = prime * result + ((hgLongitude == null) ? 0 : hgLongitude.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		HeliographicCoordinate other = (HeliographicCoordinate) obj;
+		if (hgLatitude == null) {
+			if (other.hgLatitude != null)
+				return false;
+		} else if (!hgLatitude.equals(other.hgLatitude))
+			return false;
+		if (hgLongitude == null) {
+			if (other.hgLongitude != null)
+				return false;
+		} else if (!hgLongitude.equals(other.hgLongitude))
+			return false;
+		return true;
+	}
 }
