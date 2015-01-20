@@ -62,7 +62,7 @@ public class HeliocentricCartesianCoordinate implements Coordinate {
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
-		sb.append(DESCRIPTION).append(" (").append(ACRONYM).append(") ");
+		sb.append(getCoordinateSystemDescription()).append(" (").append(getCoordinateSystemAcronym()).append(") ");
 		sb.append("[").append(x).append("m/").append(y);
 		if (!Double.isNaN(z)) {
 			sb.append("m/").append(z);
