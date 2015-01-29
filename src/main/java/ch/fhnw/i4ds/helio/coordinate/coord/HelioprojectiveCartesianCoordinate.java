@@ -26,53 +26,53 @@ public class HelioprojectiveCartesianCoordinate implements Coordinate {
 		return DESCRIPTION;
 	}
 
-	private final Angle x;
-	private final Angle y;
+	private final Angle thetaX;
+	private final Angle thetaY;
 	private final double sunDistance;
 
 	/**
 	 * Distance between observer and Sun is set to 1AU.
 	 * 
-	 * @param x
+	 * @param thetaX
 	 *            angle from center of sun as seen from observer.
-	 * @param y
+	 * @param thetaY
 	 *            angle from center of sun as seen from observer.
 	 */
-	public HelioprojectiveCartesianCoordinate(Angle x, Angle y) {
-		this(x, y, Constants.AU.getValue());
+	public HelioprojectiveCartesianCoordinate(Angle thetaX, Angle thetaY) {
+		this(thetaX, thetaY, Constants.AU.getValue());
 	}
 
 	/**
 	 * 
-	 * @param x
+	 * @param thetaX
 	 *            angle from center of sun as seen from observer.
-	 * @param y
+	 * @param thetaY
 	 *            angle from center of sun as seen from observer.
 	 * @param sunDistance
 	 *            distance between observer and Sun in Meters.
 	 */
-	public HelioprojectiveCartesianCoordinate(Angle x, Angle y, double sunDistance) {
-		this.x = x;
-		this.y = y;
+	public HelioprojectiveCartesianCoordinate(Angle thetaX, Angle thetaY, double sunDistance) {
+		this.thetaX = thetaX;
+		this.thetaY = thetaY;
 		this.sunDistance = sunDistance;
 	}
 
 	/**
-	 * X from center of Sun along equator as seen from observer.
+	 * X angle from center of Sun along equator as seen from observer.
 	 * 
-	 * @return x
+	 * @return thetaX
 	 */
-	public Angle getX() {
-		return x;
+	public Angle getThetaX() {
+		return thetaX;
 	}
 
 	/**
-	 * Y from center of Sun to pole as seen from observer.
+	 * Y angle from center of Sun to pole as seen from observer.
 	 * 
-	 * @return y
+	 * @return thetaY
 	 */
-	public Angle getY() {
-		return y;
+	public Angle getThetaY() {
+		return thetaY;
 	}
 
 	public double getSunDistance() {
@@ -83,7 +83,7 @@ public class HelioprojectiveCartesianCoordinate implements Coordinate {
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
 		sb.append(DESCRIPTION).append(" (").append(ACRONYM).append(") ");
-		sb.append("[").append(x.arcsecValue()).append("''/").append(y.arcsecValue());
+		sb.append("[").append(thetaX.arcsecValue()).append("''/").append(thetaY.arcsecValue());
 		sb.append("'', sunDistance=").append(sunDistance == Constants.AU.getValue() ? "1AU" : (sunDistance + "m"))
 						.append("]");
 		return sb.toString();
@@ -96,8 +96,8 @@ public class HelioprojectiveCartesianCoordinate implements Coordinate {
 		long temp;
 		temp = Double.doubleToLongBits(sunDistance);
 		result = prime * result + (int) (temp ^ (temp >>> 32));
-		result = prime * result + ((x == null) ? 0 : x.hashCode());
-		result = prime * result + ((y == null) ? 0 : y.hashCode());
+		result = prime * result + ((thetaX == null) ? 0 : thetaX.hashCode());
+		result = prime * result + ((thetaY == null) ? 0 : thetaY.hashCode());
 		return result;
 	}
 
@@ -112,15 +112,15 @@ public class HelioprojectiveCartesianCoordinate implements Coordinate {
 		HelioprojectiveCartesianCoordinate other = (HelioprojectiveCartesianCoordinate) obj;
 		if (Double.doubleToLongBits(sunDistance) != Double.doubleToLongBits(other.sunDistance))
 			return false;
-		if (x == null) {
-			if (other.x != null)
+		if (thetaX == null) {
+			if (other.thetaX != null)
 				return false;
-		} else if (!x.equals(other.x))
+		} else if (!thetaX.equals(other.thetaX))
 			return false;
-		if (y == null) {
-			if (other.y != null)
+		if (thetaY == null) {
+			if (other.thetaY != null)
 				return false;
-		} else if (!y.equals(other.y))
+		} else if (!thetaY.equals(other.thetaY))
 			return false;
 		return true;
 	}

@@ -29,8 +29,8 @@ public class Hg2HpcConverterTest {
 
 		HeliographicCoordinate hg = new HeliographicCoordinate(Angle.fromDeg(34.0), Angle.fromDeg(45.0));
 		HelioprojectiveCartesianCoordinate hpc = converter.convert(hg, opt);
-		Assert.assertEquals(380.21852263743313, hpc.getX().arcsecValue(), 1e-11);
-		Assert.assertEquals(679.9387612695175, hpc.getY().arcsecValue(), 1e-11);
+		Assert.assertEquals(380.21852263743313, hpc.getThetaX().arcsecValue(), 1e-11);
+		Assert.assertEquals(679.9387612695175, hpc.getThetaY().arcsecValue(), 1e-11);
 	}
 
 	@Test
@@ -43,11 +43,11 @@ public class Hg2HpcConverterTest {
 		List<HelioprojectiveCartesianCoordinate> hccList = converter.convert(Arrays.asList(hg1, hg2), opt);
 		
 		// coord 1
-		Assert.assertTrue(Double.isNaN(hccList.get(0).getX().degValue()));
-		Assert.assertTrue(Double.isNaN(hccList.get(0).getY().degValue()));
+		Assert.assertTrue(Double.isNaN(hccList.get(0).getThetaX().degValue()));
+		Assert.assertTrue(Double.isNaN(hccList.get(0).getThetaY().degValue()));
 
 		// coord 2
-		Assert.assertEquals(439.9217730935452, hccList.get(1).getX().arcsecValue(), 1e-11);
-		Assert.assertEquals(796.1978740233601, hccList.get(1).getY().arcsecValue(), 1e-11);
+		Assert.assertEquals(439.9217730935452, hccList.get(1).getThetaX().arcsecValue(), 1e-11);
+		Assert.assertEquals(796.1978740233601, hccList.get(1).getThetaY().arcsecValue(), 1e-11);
 	}
 }

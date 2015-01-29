@@ -30,8 +30,8 @@ public class Hcc2HpcConverterTest {
     	
     	HelioprojectiveCartesianCoordinate hpc = converter.convert(hcc, opt);
     	
-    	Assert.assertEquals(40.0, hpc.getX().arcsecValue(), 1.0);
-    	Assert.assertEquals(32.0, hpc.getY().arcsecValue(), 1.0);
+    	Assert.assertEquals(40.0, hpc.getThetaX().arcsecValue(), 1.0);
+    	Assert.assertEquals(32.0, hpc.getThetaY().arcsecValue(), 1.0);
     	Assert.assertEquals(Constants.AU.getValue(), hpc.getSunDistance(), 1.0);
     }
 }

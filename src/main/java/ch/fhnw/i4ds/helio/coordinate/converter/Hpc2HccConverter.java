@@ -40,10 +40,10 @@ public class Hpc2HccConverter extends
 	@Override
 	public HeliocentricCartesianCoordinate convert(HelioprojectiveCartesianCoordinate hpc,
 					Map<ConverterOption<?>, Object> opt) {
-		double cosx = Math.cos(hpc.getX().radValue());
-		double sinx = Math.sin(hpc.getX().radValue());
-		double cosy = Math.cos(hpc.getY().radValue());
-		double siny = Math.sin(hpc.getY().radValue());
+		double cosx = Math.cos(hpc.getThetaX().radValue());
+		double sinx = Math.sin(hpc.getThetaX().radValue());
+		double cosy = Math.cos(hpc.getThetaY().radValue());
+		double siny = Math.sin(hpc.getThetaY().radValue());
 
 		double sunRadius = Constants.SUN_RADIUS.getValue();
 		double sunDistance = hpc.getSunDistance();
