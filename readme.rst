@@ -2,14 +2,9 @@
 Heliophysics coordinate transformation library
 ==============================================
 
-Changelog
----------
-* 09-Dez-2014: Switch API to use <Angle> instead of double for angular values.
-* 03-Dez-2014: HPC2HG and HG2HPC
-* 02-Dez-2014: Refactor way to pass custom options to converters.
-* 28-Nov-2014: HPC2HCC and HCC2HPC
-* 26-Nov-2014: HG2HCC and HCC2HG
-
+Version
+-------
+28-Feb-2015: 0.0.3-SNAPSHOT
 
 Overview
 --------
@@ -151,6 +146,16 @@ The available converters can be found in package
 	System.out.println(hcc);
 	System.out.println(hg);
 
+For Hcc2HpcConverter you can compute the distance from Earth to Sun and pass it to the HGC Converter
+
+::
+	
+	DateTime date = new DateTime(year, month, day, 0, 0);
+	SunDistanceAlgo sunDistAlgo = new Pb0rSunDistanceAlgo();
+	SunDistance sunDist = sunDistAlgo.computeDistance(date);
+	
+	HelioprojectiveCartesianCoordinate hpc = hcc2hpcConverter.convert(hcc, opt);
+	
 
 Use CoordConverterService
 `````````````````````````
