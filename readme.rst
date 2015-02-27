@@ -154,6 +154,10 @@ For Hcc2HpcConverter you can compute the distance from Earth to Sun and pass it 
 	SunDistanceAlgo sunDistAlgo = new Pb0rSunDistanceAlgo();
 	SunDistance sunDist = sunDistAlgo.computeDistance(date);
 	
+	Map<ConverterOption<?>, Object> opt = hcc2hpc.getCustomOptions();
+	opt.put(ConverterOptions.SUN_DISTANCE, sunDist.getSunDistance());
+	
+	...    	
 	HelioprojectiveCartesianCoordinate hpc = hcc2hpcConverter.convert(hcc, opt);
 	
 
