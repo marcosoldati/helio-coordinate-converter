@@ -29,5 +29,4 @@ public class ConverterOptions {
 		ConverterOption<T> option = new ConverterOption<T>(name, description, value, unit);
 		return option;
 	}
-
 }
