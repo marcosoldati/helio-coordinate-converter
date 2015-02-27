@@ -65,6 +65,7 @@ public class Pb0rSunDistanceAlgo implements SunDistanceAlgo {
 	    double d = 350.70 + (445267.110 * t % 360.0);
 
 	    // Form the geocentric distance(r) and semi-diameter(sd)
+	    // r is in fraction of 1AU
 	    double r = 1.0001410 - (0.0167480 - 0.00004180 * t) * Math.cos(Math.toRadians(me)) 
 	        - 0.000140 * Math.cos(Math.toRadians(2.0 * me)) 
 	        + 0.0000160 * Math.cos(Math.toRadians(58.30 + 2.0 * mv - 2.0 * me)) 
