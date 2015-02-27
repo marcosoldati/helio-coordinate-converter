@@ -7,9 +7,6 @@ import org.joda.time.DateTimeZone;
 import org.junit.Before;
 import org.junit.Test;
 
-import ch.fhnw.i4ds.helio.coordinate.sunpos.NewcombSunPositionAlgo;
-import ch.fhnw.i4ds.helio.coordinate.sunpos.SunPosition;
-
 public class Pb0rSunDistanceAlgoTest {
 
 	private Pb0rSunDistanceAlgo sunDistanceAlgo;
@@ -21,8 +18,8 @@ public class Pb0rSunDistanceAlgoTest {
 	
 	@Test
 	public void testSunDistanceAlgo() {
-		SunPosition sunPosition = getSampleSunPosition(2013, 03, 27);
-		SunDistance sunDistance = sunDistanceAlgo.computeDistance(sunPosition);
+		DateTime date = getSampleSunPosition(2013, 03, 27);
+		SunDistance sunDistance = sunDistanceAlgo.computeDistance(date);
 
 		// verified with IDL
 		// IDL> print,  pb0r('2013-03-27')
@@ -33,10 +30,9 @@ public class Pb0rSunDistanceAlgoTest {
 		assertEquals(0.9977813876481756, sunDistance.getSunDistance(), 1e-11);
 	}
 
-	private SunPosition getSampleSunPosition(int year, int month, int day) {
+	private DateTime getSampleSunPosition(int year, int month, int day) {
 		DateTime date = new DateTime(year, month, day, 0, 0, DateTimeZone.UTC);
-		SunPosition sunPosition = new NewcombSunPositionAlgo().computeSunPos(date);
-		return sunPosition;
+		return date;
 	}
 	
 }

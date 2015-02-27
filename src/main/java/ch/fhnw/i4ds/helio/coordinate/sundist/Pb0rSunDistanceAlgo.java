@@ -1,7 +1,12 @@
 package ch.fhnw.i4ds.helio.coordinate.sundist;
 
+
+import org.joda.time.DateTime;
+
 import ch.fhnw.i4ds.helio.coordinate.api.Angle;
+import ch.fhnw.i4ds.helio.coordinate.sunpos.NewcombSunPositionAlgo;
 import ch.fhnw.i4ds.helio.coordinate.sunpos.SunPosition;
+import ch.fhnw.i4ds.helio.coordinate.sunpos.SunPositionAlgo;
 import ch.fhnw.i4ds.helio.coordinate.util.Constants;
 import ch.fhnw.i4ds.helio.coordinate.util.JulianDateUtils;
 
@@ -13,22 +18,26 @@ import ch.fhnw.i4ds.helio.coordinate.util.JulianDateUtils;
  *
  */
 public class Pb0rSunDistanceAlgo implements SunDistanceAlgo {
+	
+	private SunPositionAlgo sunPositionAlgo = new NewcombSunPositionAlgo();
 
 	@Override
-	public SunDistance computeDistance(SunPosition sunPosition) {
-		return computeDistance(sunPosition, Observer.EARTH);
+	public SunDistance computeDistance(DateTime date) {
+		return computeDistance(date, Observer.EARTH);
 	}
 
 	@Override
-	public SunDistance computeDistance(SunPosition sunPosition, Observer observer) {
+	public SunDistance computeDistance(DateTime date, Observer observer) {
 		assertObserverIsEarth(observer);
 		
 	    // number of Julian days since 2415020.0
-	    double de = JulianDateUtils.julianDaySinceJ19000101(sunPosition.getDateTime());
+	    double de = JulianDateUtils.julianDaySinceJ19000101(date);
 
-		double longmed = sunPosition.getLongitude().degValue();
-	    double appl = sunPosition.getApparentLongitude().degValue();
-	    double oblt = sunPosition.getObliquity().degValue();
+	    SunPosition sunPos = sunPositionAlgo.computeSunPos(date);
+	    
+		double longmed = sunPos.getLongitude().degValue();
+	    double appl = sunPos.getApparentLongitude().degValue();
+	    double oblt = sunPos.getObliquity().degValue();
 
 	    // form the aberrated longitude
 	    double lambda = longmed - (20.50 / 3600.0);
@@ -73,7 +82,7 @@ public class Pb0rSunDistanceAlgo implements SunDistanceAlgo {
 	    sunDistance.setP(Angle.fromDeg(p));
 	    sunDistance.setSemiDiameter(Angle.fromArcmin(sd));
 	    sunDistance.setSunDistance(r);
-	    sunDistance.setSunPosition(sunPosition);
+	    sunDistance.setSunPosition(sunPos);
 		
 		return sunDistance;
 	}
@@ -82,7 +91,13 @@ public class Pb0rSunDistanceAlgo implements SunDistanceAlgo {
 		if (observer != Observer.EARTH) {
 			throw new IllegalArgumentException("Argument 'observer' must be Earth.");
 		}
-		
 	}
-
+	
+	public SunPositionAlgo getSunPositionAlgo() {
+		return sunPositionAlgo;
+	}
+	
+	public void setSunPositionAlgo(SunPositionAlgo sunPositionAlgo) {
+		this.sunPositionAlgo = sunPositionAlgo;
+	}
 }
