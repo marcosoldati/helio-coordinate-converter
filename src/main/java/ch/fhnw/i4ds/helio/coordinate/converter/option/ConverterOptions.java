@@ -23,7 +23,6 @@ public class ConverterOptions {
 
 	public static ConverterOption<Double> SUN_DISTANCE = newOption("sunDistance",
 					"Distance between the observer and the sun", Constants.AU.getValue(), Unit.METER);
-
 	
 	// helper that could do some sanity checks.
 	private static <T> ConverterOption<T> newOption(String name, String description, T value, Unit unit) {
