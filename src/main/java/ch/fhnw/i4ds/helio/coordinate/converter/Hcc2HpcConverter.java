@@ -6,6 +6,7 @@ import java.util.Map;
 
 import ch.fhnw.i4ds.helio.coordinate.api.Angle;
 import ch.fhnw.i4ds.helio.coordinate.api.CoordConverter;
+import ch.fhnw.i4ds.helio.coordinate.api.Distance;
 import ch.fhnw.i4ds.helio.coordinate.converter.option.ConverterOption;
 import ch.fhnw.i4ds.helio.coordinate.coord.HeliocentricCartesianCoordinate;
 import ch.fhnw.i4ds.helio.coordinate.coord.HelioprojectiveCartesianCoordinate;
@@ -47,7 +48,7 @@ public class Hcc2HpcConverter extends
 		double y = hcc.getY();
 		double z = hcc.getZ();
 		double sunRadius = Constants.SUN_RADIUS.getValue();
-		double sunDistance = (Double) opt.get(SUN_DISTANCE);
+		Distance sunDistance = ((Distance) opt.get(SUN_DISTANCE));
 
 		if (Double.isNaN(z)) {
 			// Calculate the z coordinate by assuming that it is on the surface
@@ -55,7 +56,7 @@ public class Hcc2HpcConverter extends
 			z = Math.sqrt(sunRadius * sunRadius - x * x - y * y);
 		}
 
-		double zeta = sunDistance - z;
+		double zeta = sunDistance.inMeters() - z;
 		double distance = Math.sqrt(x * x + y * y + zeta * zeta);
 		Angle hpcx = Angle.fromRad((Math.atan2(x, zeta)));
 		Angle hpcy = Angle.fromRad(Math.asin(y / distance));

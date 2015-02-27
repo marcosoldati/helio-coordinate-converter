@@ -2,7 +2,7 @@ package ch.fhnw.i4ds.helio.coordinate.coord;
 
 import ch.fhnw.i4ds.helio.coordinate.api.Angle;
 import ch.fhnw.i4ds.helio.coordinate.api.Coordinate;
-import ch.fhnw.i4ds.helio.coordinate.util.Constants;
+import ch.fhnw.i4ds.helio.coordinate.api.Distance;
 
 /**
  * Helioprojective Cartesian Coordinates in Arcsecs from the sun center seen from an observers point.
@@ -28,7 +28,7 @@ public class HelioprojectiveCartesianCoordinate implements Coordinate {
 
 	private final Angle thetaX;
 	private final Angle thetaY;
-	private final double sunDistance;
+	private final Distance sunDistance;
 
 	/**
 	 * Distance between observer and Sun is set to 1AU.
@@ -39,7 +39,7 @@ public class HelioprojectiveCartesianCoordinate implements Coordinate {
 	 *            angle from center of sun as seen from observer.
 	 */
 	public HelioprojectiveCartesianCoordinate(Angle thetaX, Angle thetaY) {
-		this(thetaX, thetaY, Constants.AU.getValue());
+		this(thetaX, thetaY, Distance.fromAU(1));
 	}
 
 	/**
@@ -51,7 +51,7 @@ public class HelioprojectiveCartesianCoordinate implements Coordinate {
 	 * @param sunDistance
 	 *            distance between observer and Sun in Meters.
 	 */
-	public HelioprojectiveCartesianCoordinate(Angle thetaX, Angle thetaY, double sunDistance) {
+	public HelioprojectiveCartesianCoordinate(Angle thetaX, Angle thetaY, Distance sunDistance) {
 		this.thetaX = thetaX;
 		this.thetaY = thetaY;
 		this.sunDistance = sunDistance;
@@ -75,7 +75,7 @@ public class HelioprojectiveCartesianCoordinate implements Coordinate {
 		return thetaY;
 	}
 
-	public double getSunDistance() {
+	public Distance getSunDistance() {
 		return sunDistance;
 	}
 
@@ -84,7 +84,7 @@ public class HelioprojectiveCartesianCoordinate implements Coordinate {
 		StringBuilder sb = new StringBuilder();
 		sb.append(DESCRIPTION).append(" (").append(ACRONYM).append(") ");
 		sb.append("[").append(thetaX.arcsecValue()).append("''/").append(thetaY.arcsecValue());
-		sb.append("'', sunDistance=").append(sunDistance == Constants.AU.getValue() ? "1AU" : (sunDistance + "m"))
+		sb.append("'', sunDistance=").append(sunDistance.inAU() == 1 ? "1AU" : (sunDistance))
 						.append("]");
 		return sb.toString();
 	}
@@ -93,9 +93,7 @@ public class HelioprojectiveCartesianCoordinate implements Coordinate {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		long temp;
-		temp = Double.doubleToLongBits(sunDistance);
-		result = prime * result + (int) (temp ^ (temp >>> 32));
+		result = prime * result + ((sunDistance == null) ? 0 : sunDistance.hashCode());
 		result = prime * result + ((thetaX == null) ? 0 : thetaX.hashCode());
 		result = prime * result + ((thetaY == null) ? 0 : thetaY.hashCode());
 		return result;
@@ -110,7 +108,10 @@ public class HelioprojectiveCartesianCoordinate implements Coordinate {
 		if (getClass() != obj.getClass())
 			return false;
 		HelioprojectiveCartesianCoordinate other = (HelioprojectiveCartesianCoordinate) obj;
-		if (Double.doubleToLongBits(sunDistance) != Double.doubleToLongBits(other.sunDistance))
+		if (sunDistance == null) {
+			if (other.sunDistance != null)
+				return false;
+		} else if (!sunDistance.equals(other.sunDistance))
 			return false;
 		if (thetaX == null) {
 			if (other.thetaX != null)
@@ -124,4 +125,6 @@ public class HelioprojectiveCartesianCoordinate implements Coordinate {
 			return false;
 		return true;
 	}
+	
+	
 }

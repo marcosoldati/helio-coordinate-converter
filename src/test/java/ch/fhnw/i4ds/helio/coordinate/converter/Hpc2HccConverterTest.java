@@ -8,9 +8,9 @@ import org.junit.Before;
 import org.junit.Test;
 
 import ch.fhnw.i4ds.helio.coordinate.api.Angle;
+import ch.fhnw.i4ds.helio.coordinate.api.Distance;
 import ch.fhnw.i4ds.helio.coordinate.coord.HeliocentricCartesianCoordinate;
 import ch.fhnw.i4ds.helio.coordinate.coord.HelioprojectiveCartesianCoordinate;
-import ch.fhnw.i4ds.helio.coordinate.util.Constants;
 
 public class Hpc2HccConverterTest {
 	private Hpc2HccConverter converter;
@@ -33,7 +33,7 @@ public class Hpc2HccConverterTest {
 	@Test
 	public void convert_custom_sun_distance() {
 		HelioprojectiveCartesianCoordinate hpc = new HelioprojectiveCartesianCoordinate(Angle.fromArcsec(40.0),
-						Angle.fromArcsec(32.0), Constants.AU.getValue() / 2);
+						Angle.fromArcsec(32.0), Distance.fromAU(0.5));
 		HeliocentricCartesianCoordinate hcc = converter.convert(hpc);
 		Assert.assertEquals(1.4370589563681226E7, hcc.getX(), 0);
 		Assert.assertEquals(1.149647181523754E7, hcc.getY(), 0);

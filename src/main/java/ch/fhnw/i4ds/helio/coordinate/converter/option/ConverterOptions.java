@@ -1,6 +1,7 @@
 package ch.fhnw.i4ds.helio.coordinate.converter.option;
 
 import ch.fhnw.i4ds.helio.coordinate.api.Angle;
+import ch.fhnw.i4ds.helio.coordinate.api.Distance;
 import ch.fhnw.i4ds.helio.coordinate.util.Constants;
 import ch.fhnw.i4ds.helio.coordinate.util.Unit;
 
@@ -21,8 +22,8 @@ public class ConverterOptions {
 	public static ConverterOption<Double> SUN_RADIUS = newOption("sunRadius", "Radius of sun in meters. Defaults to "
 					+ Constants.SUN_RADIUS.getValue(), Constants.SUN_RADIUS.getValue(), Unit.METER);
 
-	public static ConverterOption<Double> SUN_DISTANCE = newOption("sunDistance",
-					"Distance between the observer and the sun", Constants.AU.getValue(), Unit.METER);
+	public static ConverterOption<Distance> SUN_DISTANCE = newOption("sunDistance",
+					"Distance between the observer and the sun", Distance.fromAU(1), Unit.NONE);
 	
 	// helper that could do some sanity checks.
 	private static <T> ConverterOption<T> newOption(String name, String description, T value, Unit unit) {

@@ -27,7 +27,7 @@ public class Pb0rSunDistanceAlgoTest {
 		assertEquals(-6.787164229758466, sunDistance.getB0().degValue(), 1e-11);
 		assertEquals(16.018312926110276, sunDistance.getSemiDiameter().arcminValue(), 1e-11);
 		// sun distance is in AU.
-		assertEquals(0.9977813876481756, sunDistance.getSunDistance(), 1e-11);
+		assertEquals(0.9977813876481756, sunDistance.getSunDistance().inAU(), 1e-11);
 	}
 
 	private DateTime getSampleSunPosition(int year, int month, int day) {

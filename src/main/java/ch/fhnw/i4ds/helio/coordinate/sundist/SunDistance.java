@@ -1,6 +1,7 @@
 package ch.fhnw.i4ds.helio.coordinate.sundist;
 
 import ch.fhnw.i4ds.helio.coordinate.api.Angle;
+import ch.fhnw.i4ds.helio.coordinate.api.Distance;
 import ch.fhnw.i4ds.helio.coordinate.sunpos.SunPosition;
 
 public class SunDistance {
@@ -15,7 +16,7 @@ public class SunDistance {
 
 	private Angle semiDiameter;
 
-	private double sunDistance;
+	private Distance sunDistance;
 
 	public SunDistance(Observer observer) {
 		this.observer = observer;
@@ -94,21 +95,21 @@ public class SunDistance {
 	}
 
 	/**
-	 * Distance from Sun in Meters.
+	 * Distance from Sun.
 	 * 
 	 * @param sunDistance
-	 *            Sun distance in meters
+	 *            Sun distance
 	 */
-	public void setSunDistance(double sunDistance) {
+	public void setSunDistance(Distance sunDistance) {
 		this.sunDistance = sunDistance;
 	}
 
 	/**
-	 * Sun distance in Meters
+	 * Sun distance.
 	 * 
-	 * @return Sun distance in meters.
+	 * @return Sun distance.
 	 */
-	public double getSunDistance() {
+	public Distance getSunDistance() {
 		return sunDistance;
 	}
 

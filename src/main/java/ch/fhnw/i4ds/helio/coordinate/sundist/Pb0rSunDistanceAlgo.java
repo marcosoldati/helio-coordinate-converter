@@ -4,6 +4,7 @@ package ch.fhnw.i4ds.helio.coordinate.sundist;
 import org.joda.time.DateTime;
 
 import ch.fhnw.i4ds.helio.coordinate.api.Angle;
+import ch.fhnw.i4ds.helio.coordinate.api.Distance;
 import ch.fhnw.i4ds.helio.coordinate.sunpos.NewcombSunPositionAlgo;
 import ch.fhnw.i4ds.helio.coordinate.sunpos.SunPosition;
 import ch.fhnw.i4ds.helio.coordinate.sunpos.SunPositionAlgo;
@@ -82,7 +83,7 @@ public class Pb0rSunDistanceAlgo implements SunDistanceAlgo {
 	    sunDistance.setB0(Angle.fromDeg(b));
 	    sunDistance.setP(Angle.fromDeg(p));
 	    sunDistance.setSemiDiameter(Angle.fromArcmin(sd));
-	    sunDistance.setSunDistance(r);
+	    sunDistance.setSunDistance(Distance.fromAU(r));
 	    sunDistance.setSunPosition(sunPos);
 		
 		return sunDistance;

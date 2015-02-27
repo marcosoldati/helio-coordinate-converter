@@ -46,7 +46,7 @@ public class Hpc2HccConverter extends
 		double siny = Math.sin(hpc.getThetaY().radValue());
 
 		double sunRadius = Constants.SUN_RADIUS.getValue();
-		double sunDistance = hpc.getSunDistance();
+		double sunDistance = hpc.getSunDistance().inMeters();
 
 		double q = sunDistance * cosy * cosx;
 		double distance = q * q - sunDistance * sunDistance + sunRadius * sunRadius;
